@@ -2,6 +2,7 @@ package de.hans.google.upload;
 
 import com.google.api.client.http.InputStreamContent;
 import com.google.api.client.util.DateTime;
+import com.google.api.client.util.Lists;
 import com.google.api.services.youtube.YouTube;
 import com.google.api.services.youtube.model.Video;
 import com.google.api.services.youtube.model.VideoSnippet;
@@ -80,7 +81,10 @@ public class UploadService {
         mediaContent.setLength(fileToUpload.length());
 
         // Define and execute the API request
-        YouTube.Videos.Insert request = youTube.videos().insert("snippet,status", video, mediaContent);
+        List<String> parts = Lists.newArrayList();
+        parts.add("snippet");
+        parts.add("status");
+        YouTube.Videos.Insert request = youTube.videos().insert(parts, video, mediaContent);
         request = request.setNotifySubscribers(notifySubscribers);
         System.out.println("... going to upload: " + downloadedVideoMetaData.getTitle());
         Video response = request.execute();
