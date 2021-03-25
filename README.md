@@ -1,3 +1,5 @@
+Simple wrapper to upload a video to YouTube and update the Thumbnail using Googles Youtube API
+
 Build for the usage in conjunction with Google Guice.
 
 Example usage:
