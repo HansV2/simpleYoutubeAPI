@@ -14,10 +14,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.youtube.YouTube;
 
 import javax.naming.ConfigurationException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.security.GeneralSecurityException;
 import java.util.Collection;
 
@@ -75,7 +72,7 @@ public class YoutubeFactory {
     }
 
     private GoogleClientSecrets loadGoogleClientSecrets() throws IOException {
-        InputStream in = this.getClass().getResourceAsStream(pathToClientSecret);
+        InputStream in = new FileInputStream(pathToClientSecret);
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         return clientSecrets;
